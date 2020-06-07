@@ -8,22 +8,23 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class PageView {
-    AppiumDriver<MobileElement> driver;
+    private AppiumDriver<MobileElement> driver;
 
-    // TODO define textField MobileElement using @FindBy kind of annotations for iOS and Android
+    @AndroidFindBy(id = "edit")
+    @iOSXCUITFindBy(iOSNsPredicate = "name == 'IntegerA'")
+    private  MobileElement textField;
 
     public PageView(AppiumDriver<MobileElement> driver) {
         this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
-    public String getTextField() {
-        // TODO return text from the textField element
-        return "";
+    public PageView setTextField(String text) {
+        textField.sendKeys(text);
+        return this;
     }
 
-    public PageView setTextField(String text) {
-        // TODO set text to the textField element
-        return this;
+    public  String getTextField() {
+        return textField.getText();
     }
 }
